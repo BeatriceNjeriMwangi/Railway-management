@@ -1,8 +1,15 @@
 from sqlalchemy import create_engine, Column, Integer, String 
 from sqlalchemy.orm import relationship 
 import sqlalchemy.orm
-from .base import Base, session
+from sqlalchemy.orm import sessionmaker
+from .base import Base
 from sqlalchemy.ext.declarative import declarative_base
+
+engine = create_engine('sqlite:///Railway.db')
+
+
+Session = sessionmaker(bind=engine)
+session = Session()
 
 class Station(Base):
     __tablename__ = 'stations'

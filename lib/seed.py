@@ -4,7 +4,7 @@ from faker import Faker
 from models.train import Train
 from models.station import Station
 from models.trainschedule import TrainSchedule
-from models.base import Base
+from models.base import Base, session
 
 engine = create_engine('sqlite:///Railway.db')
 Base.metadata.bind = engine
