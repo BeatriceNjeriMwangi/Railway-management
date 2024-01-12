@@ -58,4 +58,5 @@ train.add_command(update)
 train.add_command(list_trains)
 train.add_command(delete_train)
 if __name__ == '__main__':
+    
     train()    
