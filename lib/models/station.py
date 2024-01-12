@@ -21,7 +21,7 @@ class Station(Base):
 
 
     def __repr__(self):
-        return f"Station(id={self.id}, station_name={self.station_name},location={self.location})>"
+        return f"Station(id={self.id}, station_name={self.station_name},Location={self.Location})>"
     
     def get_station(station_name):
         return session.query(Station).filter_by(Station.station_name==station_name).first()
@@ -29,11 +29,11 @@ class Station(Base):
     def list_all_stations():
         all_stations = session.query(Station).all()
         return all_stations
-    def add_station( station_name,Location):
-        new_station = Station(station_name==station_name, Location==Location)
+    def added_station(self, station_name, Location):
+        new_station = Station(station_name=station_name, Location=Location)
         session.add(new_station)
         session.commit()
-        return(f"Station {station_name} added successfully")
+       
 
     def update_station(self, station_name, new_station_name):
         updated_station = session.query(Station).filter(station_name == new_station_name).first()

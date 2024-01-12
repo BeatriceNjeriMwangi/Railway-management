@@ -17,7 +17,7 @@ def train() :
 @click.option('--name',prompt="Enter name",help="name of the train",required=True)
 @click.option('--capacity',prompt="Enter capacity",help="capacity of the train",required=True)
 
-def add(name,capacity):
+def add_train(name,capacity):
     trains.add_train(name,capacity)
     click.echo('successfully added train')
 
@@ -49,14 +49,31 @@ def delete_train(name):
     # result = trains.delete_train( name)
     # click.echo(result)
 
-                 
+
 
                                 
-train.add_command(add)
+
+
+stations = Station()
+
+
+
+    
+
+@click.command()
+@click.option()
+def add_station(station_name, Location):
+    adding = stations.added_station(station_name, Location)
+
+
+train.add_command(add_train)
 train.add_command(get_name)
 train.add_command(update)
 train.add_command(list_trains)
 train.add_command(delete_train)
+train.add_command(add_station)
+
 if __name__ == '__main__':
     
     train()    
+    
