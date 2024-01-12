@@ -48,8 +48,8 @@ class Train(Base):
         return all_trains
     
     #deleting a train
-    def delete_train(name):
-        train_delete = session.query(Train).filter(Train.name==name).first()
+    def delete_train(self,name):
+        train_delete = self.get_name(name)
         if train_delete:
             session.delete(train_delete)
             session.commit()

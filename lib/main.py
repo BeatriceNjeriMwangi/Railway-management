@@ -2,7 +2,10 @@ import click
 from models.train import Train
 from models.station import Station
 from models.trainschedule import TrainSchedule
-from sqlalchemy.orm import session
+# from sqlalchemy.orm import sessionmaker
+
+
+
 trains = Train()
 
 @click.group()
@@ -40,10 +43,11 @@ def list_trains():
         return all_trains
     
 @click.command()
-@click.option('--name',prompt="Enter name",help="name of the train",required=True)
+@click.option('--name',prompt="Enter name",help="name of the train to delete",required=True)
 def delete_train(name):
-    deletes = trains.delete_train(session,name)
-    click.echo(deletes)
+    trains.delete_train(name)
+    # result = trains.delete_train( name)
+    # click.echo(result)
 
                  
 
