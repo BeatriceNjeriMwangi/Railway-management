@@ -31,13 +31,29 @@ class Train(Base):
         return session.query(Train).filter_by(name = name).first()
         
         
-    # def update_train(name, new_capacity):
-    #     update= session.query(Train).filter(Train.name == name).first()
-    #     if update:
+    def update_train(self,name, new_capacity):
+       
+        update= session.query(Train).filter(Train.name == name).first()
+        if update:
             
-    #         update.capacity=new_capacity
-    #         session.commit()
-    #         return f"Train {name} updated successfully."
-    #     else:
-    #         return f"Train with name {name} not found."
+            update.capacity=new_capacity
+            session.commit()
+            return f"Train {name} updated successfully."
+        else:
+            return f"Train with name {name} not found."
+        
+        #list all trains
+    def list_all_trains(self):
+        all_trains=session.query(Train).all()
+        return all_trains
     
+    #deleting a train
+    def delete_train(name):
+        train_delete = session.query(Train).filter(Train.name==name).first()
+        if train_delete:
+            session.delete(train_delete)
+            session.commit()
+            return (f"Train by {name}is deleted")
+        else:
+            return (f"Train by {name}is not found")
+
