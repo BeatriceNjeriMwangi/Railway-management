@@ -61,10 +61,26 @@ stations = Station()
     
 
 @click.command()
-@click.option()
-def add_station(station_name, Location):
-    adding = stations.added_station(station_name, Location)
+@click.option('--station_name',prompt="Enter station_name",help="name of the station added",required=True)
+@click.option('--Location',prompt="Enter location",help="location of the station")
+def add_station(station_name, location):
+    stations.added_station(station_name, location)
+    click.echo("Added station")
+@click.command()
+@click.option('--name',prompt="Enter station_name",help="name of the station added",required=True)
+def get_station_name(name):
+    named = stations.get_station(name)
 
+@click.command()
+def list_stations():
+    all_stations = stations.list_all_stations()
+
+@click.command()
+@click.option('--name',prompt="Enter station_name",help="name of the station added",required=True)
+def delete(name):
+    stations.delete_station(name)
+
+    
 
 train.add_command(add_train)
 train.add_command(get_name)
@@ -72,6 +88,9 @@ train.add_command(update)
 train.add_command(list_trains)
 train.add_command(delete_train)
 train.add_command(add_station)
+train.add_command(get_station_name)
+train.add_command(list_stations)
+train.add_command(delete)
 
 if __name__ == '__main__':
     

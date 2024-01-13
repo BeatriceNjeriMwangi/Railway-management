@@ -23,34 +23,34 @@ class Station(Base):
     def __repr__(self):
         return f"Station(id={self.id}, station_name={self.station_name},Location={self.Location})>"
     
-    def get_station(station_name):
-        return session.query(Station).filter_by(Station.station_name==station_name).first()
-    
-    def list_all_stations():
+    def get_station(self, name):
+        station= session.query(Station).filter(Station.station_name==name).first()
+        print (f"found Station {station.station_name} located at {station.Location} ")
+    def list_all_stations(self):
+      
         all_stations = session.query(Station).all()
+        for station in all_stations:
+            print(f"Station ID: {station.id}, Name: {station.station_name}, Location: {station.Location}")
+
+      
         return all_stations
-    def added_station(self, station_name, Location):
-        new_station = Station(station_name=station_name, Location=Location)
+        
+    def added_station(self, station_name, location):
+        new_station = Station(station_name=station_name, Location=location)
         session.add(new_station)
         session.commit()
        
 
-    def update_station(self, station_name, new_station_name):
-        updated_station = session.query(Station).filter(station_name == new_station_name).first()
-        if updated_station:
-            updated_station.name=new_station_name
-            session.commit()
-            return(f"Station{station_name} updated")
-        
-        else:
-            return(f"Station{station_name} not updated")
+    
+    def delete_station(self,name):
+        # Retrieve the station to delete
+        station_to_delete = session.query(Station).filter(Station.station_name == name).first()
 
-    def delete_station(station_name):
-        deleted_station = session.query(Station).filter(Station.station_name==station_name)
-
-        if deleted_station:
-            session.delete(deleted_station)
+        if station_to_delete:
+            # Delete the station
+            session.delete(station_to_delete)
             session.commit()
-            return(f"Station{station_name} has been deleted")
+            return print(f"Station {name} deleted successfully")
+
         else:
-            return(f"Station{station_name} not deleted")
+            return print(f"Station {name} not found")
