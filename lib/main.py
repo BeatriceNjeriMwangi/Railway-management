@@ -80,7 +80,30 @@ def list_stations():
 def delete(name):
     stations.delete_station(name)
 
-    
+schedules = TrainSchedule()
+@click.command()
+@click.option('--train_id',prompt="Enter train_id",help="train_id of the train",required=True)
+@click.option('--station_id',prompt="Enter station_id",help="station_id of the train",required=True)
+
+@click.option('--depature_time',prompt="Enter depature_time",help="depature_time of the train")
+@click.option('--arrival_time',prompt="Enter arrival_time",help="arrival_time of the train")
+def add_schedule(train_id, station_id, depature_time,arrival_time):
+    schedules.add_to_schedule(train_id,station_id, depature_time,arrival_time)
+
+
+@click.command()
+def list():
+    all_schedules = schedules.list_schedule()
+
+@click.command()
+@click.option('--schedule_id',prompt="Enter schedule_id",help="schedule_id present",required=True)
+def delete_schedule(schedule_id):
+    schedule = schedules.delete_schedule(schedule_id)
+    # if schedule:
+    #     schedules.delete_schedule(schedule)
+    #     click.echo('Successfully deleted schedule.')
+    # else:
+    #     click.echo('Schedule not found.')
 
 train.add_command(add_train)
 train.add_command(get_name)
@@ -91,7 +114,9 @@ train.add_command(add_station)
 train.add_command(get_station_name)
 train.add_command(list_stations)
 train.add_command(delete)
-
+train.add_command(add_schedule)
+train.add_command(list)
+train.add_command(delete_schedule)
 if __name__ == '__main__':
     
     train()    
